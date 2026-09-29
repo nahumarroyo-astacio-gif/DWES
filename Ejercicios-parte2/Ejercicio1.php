@@ -22,5 +22,19 @@
 
         <img src="https://img.magnific.com/vector-premium/plantilla-diseno-ilustracion-vectorial-icono-tubo-cilindro_827767-5460.jpg?semt=ais_hybrid&w=740&q=80" alt="Imagen de un cilindro" width="200">
 
+    <?php
+	if(isset($_POST["calcular"])){
+		$altura = $_POST["altura"];
+		$radio = $_POST["radio"];
+
+		$volumen = 3.14159 *$radio * $radio *$altura;
+
+		echo "El volumen del cilindro es: " . $volumen . " cm^3";
+	}
+?>
+
+
+
+
 </body>
 </html>
