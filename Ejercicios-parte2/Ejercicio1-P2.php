@@ -5,9 +5,10 @@
 
 		$volumen = 3.14159 *$radio * $radio *$altura;
 
+		echo "El volumen del cilindro es: " . $volumen . " cm^3";
 	}
 
-	echo "El volumen del cilindro es: " . $volumen . " cm^3"
+	
 
 ?>
 
