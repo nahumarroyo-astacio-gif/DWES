@@ -7,6 +7,7 @@
 
 	}
 
+	echo "El volumen del cilindro es: " . $volumen . " cm^3"
 
 ?>
 
