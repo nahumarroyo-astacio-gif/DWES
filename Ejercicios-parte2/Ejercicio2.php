@@ -11,11 +11,11 @@
 <form method="post">
 
     Número 1: <input type="number" name="n1" min="1" max="49" required><br>
-    Número 2: <input type="number" name="n1" min="1" max="49" required><br>
-    Número 3: <input type="number" name="n1" min="1" max="49" required><br>
-    Número 4: <input type="number" name="n1" min="1" max="49" required><br>
-    Número 5: <input type="number" name="n1" min="1" max="49" required><br>
-    Número 6: <input type="number" name="n1" min="1" max="49" required><br>
+    Número 2: <input type="number" name="n2" min="1" max="49" required><br>
+    Número 3: <input type="number" name="n3" min="1" max="49" required><br>
+    Número 4: <input type="number" name="n4" min="1" max="49" required><br>
+    Número 5: <input type="number" name="n5" min="1" max="49" required><br>
+    Número 6: <input type="number" name="n6" min="1" max="49" required><br>
 
     Serie: <input type="number" name="serie" min="1"max="999" required><br>
 
@@ -34,12 +34,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $n6 = $_POST["n6"];
     $nserie = $_POST["serie"];
 
-    $generados = [1] =rand(1, 49);
-    $generados = [2] =rand(1, 49);
-    $generados = [3] =rand(1, 49);
-    $generados = [4] =rand(1, 49);
-    $generados = [5] =rand(1, 49);
-    $generados = [6] =rand(1, 49);
+    $generados1 =rand(1, 49);
+    $generados2 =rand(1, 49);
+    $generados3 =rand(1, 49);
+    $generados4 =rand(1, 49);
+    $generados5 =rand(1, 49);
+    $generados6 =rand(1, 49);
     $serieGenerada = rand(1, 999);
 
     echo"<h2>Resultados</h2>";
@@ -76,14 +76,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     echo "<td>$num4</td>";
     echo "<td>$num5</td>";
     echo "<td>$num6</td>";
-    echo "<td>$serie</td>"; 
+    echo "<td>$nserie</td>"; 
     echo "</tr>"; 
     
     echo "</table>";
 
 }
 
-
+?>
     
 </body>
 </html>
