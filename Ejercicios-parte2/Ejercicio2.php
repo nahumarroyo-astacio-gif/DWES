@@ -44,9 +44,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     echo"<h2>Resultados</h2>";
 
-    echo"<table border= '1'>"
+    echo"<table border= '1'>";
     
-    echo"<tr>"
+    echo"<tr>";
     echo"<th>Combinación</th>";
     echo"<th>Número 1</th>";
     echo"<th>Número 2</th>";
