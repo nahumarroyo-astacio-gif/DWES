@@ -34,12 +34,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $n6 = $_POST["n6"];
     $nserie = $_POST["serie"];
 
-    $generados1 =rand(1, 49);
-    $generados2 =rand(1, 49);
-    $generados3 =rand(1, 49);
-    $generados4 =rand(1, 49);
-    $generados5 =rand(1, 49);
-    $generados6 =rand(1, 49);
+    $generado1 =rand(1, 49);
+    $generado2 =rand(1, 49);
+    $generado3 =rand(1, 49);
+    $generado4 =rand(1, 49);
+    $generado5 =rand(1, 49);
+    $generado6 =rand(1, 49);
     $serieGenerada = rand(1, 999);
 
     echo"<h2>Resultados</h2>";
@@ -70,12 +70,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     echo "<tr>";
     echo "<td>Introducida</td>";
-    echo "<td>$num1</td>";
-    echo "<td>$num2</td>";
-    echo "<td>$num3</td>";
-    echo "<td>$num4</td>";
-    echo "<td>$num5</td>";
-    echo "<td>$num6</td>";
+    echo "<td>$n1</td>";
+    echo "<td>$n2</td>";
+    echo "<td>$n3</td>";
+    echo "<td>$n4</td>";
+    echo "<td>$n5</td>";
+    echo "<td>$n6</td>";
     echo "<td>$nserie</td>"; 
     echo "</tr>"; 
     
