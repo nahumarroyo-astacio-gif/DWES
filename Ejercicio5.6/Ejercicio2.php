@@ -13,7 +13,7 @@
 
     for($i=0; $i<10; $i++){
 
-        $numero = readline("Añade un numero: ");
+        $numero[$i] = readline("Añade un numero: ");
 
     }
 
