@@ -8,22 +8,22 @@
 <body>
 
     <?php 
-    $nuemro = array():
+    $numero = array();
     $cuadrado = array();
     $cubo = array();
 
     for($i = 0; $i < 20; $i++){
-        $numero[$] = rand(0, 100);
+        $numero[$i] = rand(0, 100);
 
-        $cuadrado = $numero * $numero;
+        $cuadrado[$i] = $numero[$i] * $numero[$i];
 
-        $cubo = $numero * $numero * $numero;
+        $cubo[$i] = $numero[$i] * $numero[$i] * $numero[$i];
 
     }
 
     echo "<h1>Arrays aleatorios de 20 numeros</h1>";
 
-    echo "<table border="1">";
+    echo "<table border='1'>";
 
     echo"<tr>";
     echo"<th>Número: </th>";
@@ -34,17 +34,17 @@
     for($i = 0; $i<20; $i++){
 
     echo"<tr>";
-    echo"<th> . $numero[i] . </th>";
-    echo"<th> . $cuadrado[i] . </th>";
-    echo"<th> . $cubo[i] . </th>";
-    echo"</tr>"
+    echo"<th>" . $numero[$i] . "</th>";
+    echo"<th>" . $cuadrado[$i] . "</th>";
+    echo"<th>" . $cubo[$i] . "</th>";
+    echo"</tr>";
 
     }
 
     
-    </table>
+    echo"</table>";
 
-
+?>
 
     
 </body>
