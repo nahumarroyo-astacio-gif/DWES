@@ -26,14 +26,14 @@
         echo $numero[$i];
 
         if($numero[$i] == $maximo){
-            echo" máximo";
+            echo" máximo ";
         }
 
         if($numero[$i] == $minimo){
-            echo " minimo";
+            echo " minimo ";
         }
 
-        echo"<br>";
+        echo" ";
 
     }
 
