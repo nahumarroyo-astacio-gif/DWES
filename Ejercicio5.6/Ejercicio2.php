@@ -20,7 +20,7 @@
     $maximo = max($numero);
     $minimo = min($numero);
 
-    echo"<h1>Números introducidos</h1>"
+    echo"<h1>Números introducidos</h1>";
 
     for($i=0; $i<10; $i++){
         echo $numero[$i];
