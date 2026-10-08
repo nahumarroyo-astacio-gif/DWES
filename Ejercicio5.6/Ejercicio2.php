@@ -33,7 +33,7 @@
             echo " minimo ";
         }
 
-        echo"<br>";
+        echo" ";
 
     }
 
