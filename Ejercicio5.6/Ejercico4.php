@@ -19,31 +19,30 @@
     echo"<h1>Números generados</h1>";
 
     for($i = 0; $i<100; $i++){
-        echo numero[$i] . " ";
+        echo $numero[$i] . " ";
     }
 
     echo"<br>";
 
-    echo"<form method="post">"
-
-    echo"Primer valor: ";
-    echo"<input typr="number" name="valor1" min="0" max="20" required><br>";
-    echo"Segundo valor: ";
-    echo"<input typr="number" name="valor1" min="0" max="20" required><br>";
+    echo'<form method="post">';
+    echo'Primer valor: ';
+    echo'<input typr="number" name="valor1" min="0" max="20" required><br>';
+    echo"Segundo valor:";
+    echo'<input typr="number" name="valor2" min="0" max="20" required><br>';
 
     for($i = 0; $i < 100; $i++){
-        echo"<input type="hidden" name="numero[]" value=" . $numero[$i] . ">";
+        echo'<input type="hidden" name="numero[]" value="' . $numero[$i] . '">';
     }
 
-    echo"<input type="submit" name="cambiar" value="cambiar">";
+    echo'<input type="submit" name="cambiar" value="cambiar">';
     
     
-    echo"</form>"
+    echo"</form>";
         
     } else{
         $numero = $_POST["numero"];
-        $valor1 = $POST["valor1"];
-        $valor2 = $POST["valor2"];
+        $valor1 = $_POST["valor1"];
+        $valor2 = $_POST["valor2"];
 
         echo"<h1>Resultado</h1>";
         
@@ -53,16 +52,15 @@
 
             $numero[$i] = $valor2;
 
-            echo $nuemro[$i];
+            echo $numero[$i];
         }else{
             echo $numero[$i] . " ";
         }
-        
+
         }
     }
 
-    
-
+?>
 
     
     
