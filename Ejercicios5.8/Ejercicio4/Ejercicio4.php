@@ -13,7 +13,7 @@ if(!isset($_SESSION['persona'])){
  ['nombre'=>'Jenifer','sexo'=>'m','orientacion'=>'hom'],
  ['nombre'=>'Susan','sexo'=>'m','orientacion'=>'hom'],
  ['nombre'=>'Peter','sexo'=>'h','orientacion'=>'hom'],
- ['nombre'=>'Mike','sexo'=>'h','orientacion'=> 'hom']],
+ ['nombre'=>'Mike','sexo'=>'h','orientacion'=> 'hom']];
 }
 
 if(isset($_POST['guardar'])){
@@ -23,10 +23,10 @@ if(isset($_POST['guardar'])){
 
     if($nombre != ''){
         $_SESSION['persona'][] = [
-            'nombre' => $nombre;
-            'sexo ' => $sexo;
+            'nombre' => $nombre,
+            'sexo' => $sexo,
             'orientacion' => $orientacion
-        ]
+        ];
     }
 }
   
@@ -44,7 +44,7 @@ if(isset($_POST['guardar'])){
     
 <h2>Primera página: Personas</h2>
 
-<form>
+<form method="post">
     Nombre: <input type="text" name="nombre" required><br>
     Sexo: <select name="sexo">
             <option value="h">Hombre</option>
@@ -68,12 +68,17 @@ if(isset($_POST['guardar'])){
 <h3>Personas introducidas</h3>
 
 <ul>
-<?php
 
-foreach($_SESSION['persona'] as $persona){
-    echo $persona['nombre'];
-}
-    
+<?php
+    foreach($_SESSION['persona'] as $persona){
+?> 
+    <li>
+   <?php
+       echo $persona['nombre'];
+   ?> 
+    </li>
+<?php
+    }  
 ?>
 </ul>
     
