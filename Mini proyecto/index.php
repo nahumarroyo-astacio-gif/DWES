@@ -1,3 +1,10 @@
+<?php
+require_once "funciones.php";
+require_once "datos.php";
+
+$productosFiltrados = $productos;
+
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
