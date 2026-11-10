@@ -40,15 +40,17 @@
 
         $tabla = "<table border = 1>";
         
-        foreach ($$tarjeta as $fila) {
+        foreach ($tarjeta as $fila) {
             $tabla .= "<tr>";
-            
-            foreach ($fila as $$numero) {
-                
-            }
 
+            foreach ($fila as $$numero) {
+                $tabla .= "<td>$numero</td>";
+            }
+            $tabla .= "</tr>";
         }
-    
+        $tabla .= "</table>";
+
+        return $tabla;
     }
 
 ?>
