@@ -18,6 +18,8 @@
 
     function dameTarjeta ($perfil){
 
+    global $admin, $estandar;
+
         if($perfil == "admin"){
             return $admin;
         }else{
@@ -27,7 +29,7 @@
 
     function compruebaClave ($tarjeta, $fila, $columna, $valor){
       
-        $numero = $valor[$fila - 1][$columna];
+        $numero = $tarjeta[$fila - 1][$columna];
 
         if($numero == $valor){
             return true;
