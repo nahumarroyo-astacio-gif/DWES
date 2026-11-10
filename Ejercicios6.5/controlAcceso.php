@@ -1,5 +1,7 @@
 <?php
-    $admin=[
+    function dameTarjeta ($perfil){
+   
+   $admin=[
         [12, 34, 56, 78, 90],
         [23, 45, 67, 89, 10],
         [11, 22, 33, 44, 55],
@@ -16,7 +18,7 @@
 
     ];
 
-    function dameTarjeta ($perfil){
+   
 
     global $admin, $estandar;
 
@@ -45,7 +47,7 @@
         foreach ($tarjeta as $fila) {
             $tabla .= "<tr>";
 
-            foreach ($fila as $$numero) {
+            foreach ($fila as $numero) {
                 $tabla .= "<td>$numero</td>";
             }
             $tabla .= "</tr>";
