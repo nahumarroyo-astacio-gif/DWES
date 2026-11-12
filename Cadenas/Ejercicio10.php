@@ -1,7 +1,3 @@
-<?php
-require_once("../funciones/funciones10.php");    
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,6 +14,23 @@ Introduzca su nombre completo:
 </form>
 
 <?php
+function nombreCompleto ($nombre){
+
+$nombreMayus = ucwords(strtolower($nombre));
+
+$palabras = explode(" ", $nombreMayus);
+
+$iniciales = "";
+
+foreach ($palabras as $palabra) {
+    $inicial = substr($palabra, 0, 1);
+    $iniciales .= $inicial;
+}
+
+return $nombreMAyus . "<br>" . $iniciales;
+
+}
+    
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nombre = $_POST["nombre"];
     echo nombreCompleto($nombre);
