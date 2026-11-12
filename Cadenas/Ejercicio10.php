@@ -1,5 +1,5 @@
 <?php
-require_once ("../funciones/funciones10.php");    
+require_once("../funciones/funciones10.php");    
 ?>
 
 <!DOCTYPE html>
