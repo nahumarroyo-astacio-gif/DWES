@@ -70,7 +70,7 @@
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $romano = $_POST["romano"];
-        echo numeroRomano("total");
+        echo numeroRomano($romano);
     }
 
         
