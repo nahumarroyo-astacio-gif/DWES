@@ -27,7 +27,7 @@ foreach ($palabras as $palabra) {
     $iniciales .= $inicial;
 }
 
-return $nombreMAyus . "<br>" . $iniciales;
+return $nombreMayus . "<br>" . $iniciales;
 
 }
     
