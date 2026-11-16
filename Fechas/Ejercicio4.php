@@ -14,13 +14,6 @@
     </form>
 
     <?php
-        if($_SERVER["REQUEST_METHOD"] == "POST"){
-            $fecha = $_POST["fecha"];
-
-            $dia = date("d", strtotime($fecha));
-            $mes = date("m", strtotime($fecha));
-            $año = date("y", strtotime($fecha));
-        }
 
         $meses = [
             1 => "Enero",
@@ -36,6 +29,15 @@
             11 => "Noviembre",
             12 => "Diciembre"
         ];
+
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            $fecha = $_POST["fecha"];
+
+            $dia = date("d", strtotime($fecha));
+            $mes = date("m", strtotime($fecha));
+            $año = date("y", strtotime($fecha));
+        }
+
         echo $dia . " de " . $meses[$mes] . " de " . $anio;
     ?>
 
