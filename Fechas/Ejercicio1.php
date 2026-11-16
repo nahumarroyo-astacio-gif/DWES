@@ -44,9 +44,9 @@
 
                 case '3':
                     $meses = [
-                        1 => "enero";
-                        2 => "febrero";
-                         3 => "marzo",
+                        1 => "enero",
+                        2 => "febrero",
+                        3 => "marzo",
                         4 => "abril",
                         5 => "mayo",
                         6 => "junio",
