@@ -43,8 +43,8 @@
 
         if ($fecha1 <= $hoy && $fecha2 <= $hoy) {
 
-            $edad1 = floor(($hoy - $fecha1) / (60 * 60 * 24 * 365.25));
-            $edad2 = floor(($hoy - $fecha2) / (60 * 60 * 24 * 365.25));
+            $edad1 = floor(($hoy - $fecha1) / (60 * 60 * 24 * 365));
+            $edad2 = floor(($hoy - $fecha2) / (60 * 60 * 24 * 365));
 
             echo $nombre1 . " tiene " . $edad1 . " años.<br>";
             echo $nombre2 . " tiene " . $edad2 . " años.<br>";

@@ -30,7 +30,7 @@
 
             $segundos = $futura - $nacimiento;
 
-            $edad = floor($segundos / (60 * 60 * 24 * 365.25));
+            $edad = floor($segundos / (60 * 60 * 24 * 365));
 
             echo "La edad será de " . $edad . " años.";
 
