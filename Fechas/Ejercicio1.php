@@ -62,7 +62,7 @@
                     break;
                 
                 default:
-                    "formato no valido"
+                    "formato no valido";
                     break;
             }
         }else{
