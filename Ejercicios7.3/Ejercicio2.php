@@ -26,7 +26,7 @@ session_start();
 
 
     <?php
-        if ($_SERVER["RQUEST_METHOD"] == "POST") {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $numero = $_POST["numero"];
 
         

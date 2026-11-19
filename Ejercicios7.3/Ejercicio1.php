@@ -1,5 +1,19 @@
 <?php
     session_start();
+    
+    // Cerrar sesión
+if (isset($_POST['cerrarSesion'])) {
+    session_destroy();
+    header("Location: login.php");
+    exit;
+}
+
+// Comprobar si hay una sesión iniciada
+if (!isset($_SESSION['usuario'])) {
+    header("Location: login.php");
+    exit;
+}
+    
     if(!isset($_SESSION['suma'])){
         $_SESSION['suma'] = 0;
         $_SESSION['cantidad'] = 0;
