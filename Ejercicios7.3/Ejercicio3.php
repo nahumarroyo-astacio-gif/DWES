@@ -35,7 +35,7 @@
 
         }
 
-        if($_SESSION["suma"]) > 10000{
+        if($_SESSION["suma"] > 10000 ) {
             echo "Total acumulado: " . $_SESSION["suma"];
             echo "Número introducido: " . $_SESSION["acumulado"] . "</p>";
             echo "Media: " . ($_SESSION["suma"] /$_SESSION["acumulado"]) . "</p>";
