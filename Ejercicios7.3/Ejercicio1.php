@@ -41,9 +41,6 @@
                 $_SESSION['cantidad']++;
             }
         }
-    
-
-
     ?>
 
 </body>
