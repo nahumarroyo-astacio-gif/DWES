@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (isset($_SESSION["comprar"])) {
+if (!isset($_SESSION["comprar"])) {
     $_SESSION["comprar"] = [];
 }
 
@@ -123,10 +123,10 @@ if (isset($_POST["eliminar"])) {
         } elseif($id == 2) {
             $nombre = "Kike Salas";
             $precio = 20;
-            $imagen = "imagenes/kike.png"
+            $imagen = "imagenes/kike.png";
         }elseif ($id == 3) {
             $nombre = "Robbie Ure";
-            $precio = 20;
+            $precio = 15;
             $imagen = "imagenes/robbie.png";
         }
 
