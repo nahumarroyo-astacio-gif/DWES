@@ -116,15 +116,41 @@ if (isset($_POST["eliminar"])) {
     $total = 0;
 
     foreach ($_SESSION["comprar"] as $id => $cantidad) {
-        if (condition) {
-            # code...
-        } else {
-            # code...
+        if ($id == 1) {
+            $nombre = "Jon Guridi";
+            $precio = 5;
+            $imagen = "imagenes/Guridi.png";
+        } elseif($id == 2) {
+            $nombre = "Kike Salas";
+            $precio = 20;
+            $imagen = "imagenes/kike.png"
+        }elseif ($id == 3) {
+            $nombre = "Robbie Ure";
+            $precio = 20;
+            $imagen = "imagenes/robbie.png";
         }
-        
-    }
 
+        echo "<p>$nombre</p>";
+        echo "<p>Precio: $precio €</p>";
+        echo "<p>Unidades: $cantidad</p>";
+
+        $total += $precio * $cantidad;
+        
     ?>
+
+    <form method="POST">
+        <input type="hidden" name="eliminar" value="<?php echo $id; ?>">
+        <input type="submit" value="Eliminar" class="boton">
+    </form>
+    <br>
+    <?php
+    }
+    echo"<p>Total: $total</p>";
+        
+    ?>
+
+    
+    
 </body>
 
 </html>
