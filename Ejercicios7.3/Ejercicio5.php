@@ -107,11 +107,8 @@ if (isset($_POST["eliminar"])) {
         <div class="carrito">
             <h3>Carrito</h3>
             <hr>
-        </div>
 
-    </div>
-
-    <?php
+            <?php
         
     $total = 0;
 
@@ -148,6 +145,12 @@ if (isset($_POST["eliminar"])) {
     echo"<p>Total: $total</p>";
         
     ?>
+
+        </div>
+
+    </div>
+
+    
 
     
     
