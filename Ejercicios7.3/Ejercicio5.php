@@ -2,7 +2,22 @@
 session_start();
 
 if (isset($_SESSION["comprar"])) {
-    # code...
+    $_SESSION["comprar"] = [];
+}
+
+if (isset($_POST["comprar"])) {
+    $id = $_POST["comprar"];
+
+    if (isset($_SESSION["comprar"][$id])) {
+        $_SESSION["comprar"][$id]++;
+    }else {
+        $_SESSION["comprar"][$id] = 1;
+    }
+}
+
+if (isset($_POST["eliminar"])) {
+    $id = $_POST["eliminar"];
+    unset($_SESSION["comprar"][$id]);
 }
 
 ?>
@@ -64,17 +79,17 @@ if (isset($_SESSION["comprar"])) {
             <img src="imagenes/Guridi.png" alt="" width="250px" height="250px">
             <p>Jon Guridi</p>
             <p>Precio: 5€</p>
-            <input type="button" name="1" value="Comprar" class="boton">
+            <input type="submit" name="comprar" value="1" class="boton">
             <br>
             <img src="imagenes/kike.png" alt="" width="250px" height="250px">
             <p>Kike Salas</p>
             <p>Precio: 20€</p>
-            <input type="button" name="2" value="Comprar" class="boton">
+            <input type="submit" name="comprar" value="2" class="boton">
             <br>
             <img src="imagenes/robbie.png" alt="" width="250px" height="250px">
             <p>Robbie Ure</p>
             <p>Precio: 15€</p>
-            <input type="submit" name="3" value="Comprar" class="boton">
+            <input type="submit" name="comprar" value="3" class="boton">
             <br>
         </div>
         <div class="carrito">
@@ -84,8 +99,20 @@ if (isset($_SESSION["comprar"])) {
 
     </div>
 
-    
+    <?php
+        
+    $total = 0;
 
+    foreach ($_SESSION["comprar"] as $id => $cantidad) {
+        if (condition) {
+            # code...
+        } else {
+            # code...
+        }
+        
+    }
+
+    ?>
 </body>
 
 </html>
