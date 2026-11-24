@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 8</title>
+</head>
+<body>
+
+    <h1>Mini diccionario</h1>
+
+    <p>Traduzca al ingles las palabras que salen en pantalla</p>
+
+    <form method="POST">
+        <label>Gato:</label>
+        <input type="text" name="respuesta[]">
+        <br>
+        <label>Rojo:</label>
+        <input type="text" name="respuesta[]">
+        <br>
+        <label>Agua:</label>
+        <input type="text" name="respuesta[]">
+        <br>
+        <label>Cena:</label>
+        <input type="text" name="respuesta[]">
+        <br>
+        <label>Pie:</label>
+        <input type="text" name="respuesta[]">
+        <br>
+        <input type="submit" name="comprobar" value="Aceptar">
+    </form>
+    <hr>
+
+    <h2>Resultados</h2>
+    <p>Correctas: </p>
+    <p>Incorrectas: </p>
+    <p>Soluciones</p>
+    
+    <hr>
+
+    <h2>Administracion de palabras</h2>
+
+    <form method="POST">
+
+        <input type="submit" name="nueva" value="Añadir nueva palabra">
+        <input type="submit" name="reiniciar" value="Reiniciar diccionario por defecto">
+        <input type="submit" name="principal" value="Regresar a pagina principal">
+    </form>
+
+    <h3>Diccionario</h3>
+
+    <table border="1">
+
+        <tr>
+            <th>Inglés</th>
+            <th>Español</th>
+            <th>Eliminar</th>
+            <th>Modificar</th>
+        </tr>
+
+        <tr>
+            <td>cat</td>
+            <td>gato</td>
+            <td>
+                <form method="POST">
+                    <input type="hidden" name="palabra" value="cat">
+                    <input type="submit" name="eliminar" value="Eliminar">
+                </form>
+            </td>
+            <td>
+                <form method="POST">
+                    <input type="hidden" name="palabra" value="cat">
+                    <input type="submit" name="modificar" value="Modificar">
+                </form>
+            </td>
+        </tr>
+
+        <tr>
+            <td>red</td>
+            <td>rojo</td>
+            <td>
+                <form method="POST">
+                    <input type="hidden" name="palabra" value="red">
+                    <input type="submit" name="eliminar" value="Eliminar">
+                </form>
+            </td>
+            <td>
+                <form method="POST">
+                    <input type="hidden" name="palabra" value="red">
+                    <input type="submit" name="modificar" value="Modificar">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>Water</td>
+            <td>Agua</td>
+            <td>
+                <form method="POST">
+                    <input type="hidden" name="palabra" value="water">
+                    <input type="submit" name="eliminar" value="Eliminar">
+                </form>
+            </td>
+            <td>
+                <form method="POST">
+                    <input type="hidden" name="palabra" value="water">
+                    <input type="submit" name="modificar" value="Modificar">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>Dinner</td>
+            <td>Cena</td>
+            <td>
+                <form method="POST">
+                    <input type="hidden" name="palabra" value="dinner">
+                    <input type="submit" name="eliminar" value="Eliminar">
+                </form>
+            </td>
+            <td>
+                <form method="POST">
+                    <input type="hidden" name="palabra" value="dinner">
+                    <input type="submit" name="modificar" value="Modificar">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>Foot</td>
+            <td>Pie</td>
+            <td>
+                <form method="POST">
+                    <input type="hidden" name="palabra" value="foot">
+                    <input type="submit" name="eliminar" value="Eliminar">
+                </form>
+            </td>
+            <td>
+                <form method="POST">
+                    <input type="hidden" name="palabra" value="foot">
+                    <input type="submit" name="modificar" value="Modificar">
+                </form>
+            </td>
+        </tr>
+
+    </table>
+
+    <hr>
+
+    <h2>Nueva palabra</h2>
+
+    <form method="POST">
+
+        <label>Español:</label>
+        <input type="text" name="espanol">
+        <br>
+
+        <label>Inglés:</label>
+        <input type="text" name="ingles">
+        <br>
+
+        <input type="submit" name="alta" value="Alta">
+
+    </form>
+    <hr>
+
+    <h2>Modificación</h2>
+
+    <form method="POST">
+
+        <label>Español:</label>
+        <input type="text" name="espanol" value="gato">
+        <br>
+
+        <label>Inglés:</label>
+        <input type="text" name="ingles" value="cat">
+        <br>
+
+        <input type="hidden" name="anterior" value="cat">
+
+        <input type="submit" name="actualizar" value="Modificar">
+
+    </form>
+
+</body>
+</html>
