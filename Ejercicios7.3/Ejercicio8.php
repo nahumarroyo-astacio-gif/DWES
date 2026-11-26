@@ -1,380 +1,308 @@
-
 <?php
+    $diccionarioInicial = [
+        "gato" => "cat",
+        "rojo" => "red",
+        "agua" => "water",
+        "cena" => "dinner",
+        "pie" => "foot",
+        "arbol" => "tree",
+        "sol" => "sun",
+        "ordenador" => "computer"
+    ];
 
-// 1. Diccionario inicial
-$diccionarioInicial = [
-    "gato" => "cat",
-    "rojo" => "red",
-    "agua" => "water",
-    "cena" => "dinner",
-    "pie" => "foot",
-    "árbol" => "tree",
-    "sol" => "sun",
-    "ordenador" => "computer"
-];
+    if (isset($_COOKIE[2diccionario])) {
+        $diccionario = unserialize($_COOKIE["diccionario"], true);
 
-// 2. Recuperar el diccionario de la cookie
-if (isset($_COOKIE["diccionario"])) {
-
-    $diccionario = json_decode($_COOKIE["diccionario"], true);
-
-    if (!is_array($diccionario)) {
-        $diccionario = $diccionarioInicial;
-    }
-
-} else {
-    $diccionario = $diccionarioInicial;
-}
-
-// Variable para mostrar mensajes
-$mensaje = "";
-
-// 3. Procesar los formularios
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-    // COMPROBAR TRADUCCIONES
-    if (isset($_POST["comprobar"])) {
-
-        $correctas = 0;
-        $incorrectas = 0;
-        $resultados = [];
-
-        foreach ($_POST["espanol"] as $indice => $espanol) {
-
-            $respuesta = strtolower(trim($_POST["respuesta"][$indice]));
-            $solucion = strtolower($diccionario[$espanol]);
-
-            if ($respuesta == $solucion) {
-
-                $correctas++;
-
-                $resultados[] = "$espanol: $respuesta - correcto";
-
-            } else {
-
-                $incorrectas++;
-
-                $resultados[] = "$espanol: $respuesta - incorrecto, la respuesta correcta es $solucion";
-            }
+        if(!is_array($diccionario)){
+            $diccionario = $diccionarioInicial;
         }
 
-        $mostrarResultados = true;
-    }
+        $mensaje = "";
 
-    // AÑADIR PALABRA
-    if (isset($_POST["alta"])) {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            
+            $correctas = 0;
+            $incorrectas = 0;
+            $resultados = [];
 
-        $espanol = strtolower(trim($_POST["espanol"]));
-        $ingles = strtolower(trim($_POST["ingles"]));
+            foreach ($_POST["espanol"] as $indice => $espanol) {
+                $respuesta = strtolower(trim($_POST["respuesta"][$indice]));
+                $solucion = strtolower($diccionario[$espanol]);
 
-        if ($espanol != "" && $ingles != "") {
+                if ($respuesta == $solucion) {
+                    $correctas++;
 
-            if (!isset($diccionario[$espanol])) {
+                    $resultados[] = "$espanol: $respuesta - correcta";
+                }else{
+                    $incorrectas++;
+
+                    $resultados[] = "$espanol: $respuesta - incorrecto, la respuesta correcta es $solucion";
+                }
+            }
+
+            $mostrarResultados = true;
+        }
+
+        if(isset($_POST["alta"])){
+            $espanol = strtolower(trim($_POST["espanol"]));
+            $ingles = strtolower(trim($_POST["ingles"]));
+
+            if($espanol != "" && $ingles != ""){
+                if(!isset($diccionario[$espanol])){
 
                 $diccionario[$espanol] = $ingles;
 
-                setcookie("diccionario", json_encode($diccionario), time() + (86400 * 30), "/");
+                setcookie("diccionario" unserialize($diccionario), time() + (86400 * 30), "/");
 
-                header("Location: ?vista=admin");
-                exit;
-
+                }else{
+                    $mensaje = "Esa palabra ya existe";
+                }
             } else {
-                $mensaje = "Esa palabra ya existe";
+                $mensaje = "Debes rellenar los dos campos";
             }
-
-        } else {
-            $mensaje = "Debes rellenar los dos campos";
         }
-    }
 
-    // ELIMINAR PALABRA
-    if (isset($_POST["eliminar"])) {
+        if(isset($_POST["eliminar"])){
+            $espanol = $_POST["palabra"];
+            unset($diccionario[$espanol]);
+            setcookie("diccionario", unserialize($diccionario), time() + (86400 * 30), "/");
+        }
 
-        $espanol = $_POST["palabra"];
+        if(isset($_POST["actualizar"])){
+            $anterior = $_POST["anterior"];
 
-        unset($diccionario[$espanol]);
+            $espanol = strtolower(trim($_POST["espanol"]));
+            $espanol = strtolower(trim($_POST["ingles"]));
 
-        setcookie("diccionario", json_encode($diccionario), time() + (86400 * 30), "/");
-
-        header("Location: ?vista=admin");
-        exit;
-    }
-
-    // MODIFICAR PALABRA
-    if (isset($_POST["actualizar"])) {
-
-        $anterior = $_POST["anterior"];
-
-        $espanol = strtolower(trim($_POST["espanol"]));
-        $ingles = strtolower(trim($_POST["ingles"]));
-
-        if ($espanol != "" && $ingles != "") {
-
-            if ($espanol == $anterior || !isset($diccionario[$espanol])) {
-
-                unset($diccionario[$anterior]);
-
-                $diccionario[$espanol] = $ingles;
-
-                setcookie("diccionario", json_encode($diccionario), time() + (86400 * 30), "/");
-
-                header("Location: ?vista=admin");
-                exit;
-
-            } else {
-                $mensaje = "Ya existe esa palabra en español";
+            if($espanol != "" && $ingles != ""){
+                if ($espanol == $anterior || !isset($diccionario[$espanol])) {
+                    unset($diccionario[$anterior]);
+                    $diccionario[$espanol] = $ingles;
+                    setcookie("diccionario", unserialize($diccionario), time() + (86400 * 30), "/");
+                }else{
+                    $mensaje = "Ya existe esa palabra en español"
+                }
+            }else{
+                $mensaje = "Debes rellenar los dos campos";
             }
-
-        } else {
-            $mensaje = "Debes rellenar los dos campos";
         }
+
+        if (isset($_POST["reiniciar"])) {
+            $diccionario = $diccionarioInicial;
+
+            setcookie("diccionario", unserialize($diccionario), time(86400 * 30), "/");
+        }
+
     }
 
-    // REINICIAR DICCIONARIO
-    if (isset($_POST["reiniciar"])) {
-
-        $diccionario = $diccionarioInicial;
-
-        setcookie("diccionario", json_encode($diccionario), time() + (86400 * 30), "/");
-
-        header("Location: ?vista=admin");
-        exit;
-    }
-}
-
-// 4. Determinar qué página mostrar
-$vista = $_GET["vista"] ?? "juego";
+    $vista = $_GET["vista"] ?? "juego";
 
 ?>
 
-<!DOCTYPE html>
-<html lang="es">
 
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mini diccionario</title>
+    <title>Ejercicio 8</title>
 </head>
-
 <body>
 
-    <?php if ($vista == "juego"): ?>
+<?php if($vistas == "juego"): ?>
 
-        <h1>Mini diccionario</h1>
+    <h1>Mini diccionario</h1>
 
-        <p>Traduzca al inglés las palabras que salen en pantalla</p>
+    <p>Traduzca al ingles las palabras que salen en pantalla</p>
 
-        <?php
+    <?php
+    
+    $palabras = arrays_keys($diccionario);
 
-        // Escoger cinco palabras aleatorias
-        $palabras = array_keys($diccionario);
+    shuffle($palabras);
 
-        shuffle($palabras);
+    $palabras = array_slice($palabras, 0, 5);
+    ?>
 
-        $palabras = array_slice($palabras, 0, 5);
+    <form method="POST">
+        <?php foreach ($palabras as $palabra): ?>
 
-        ?>
+        <label>
+            <?= htmlspecialchars($palabra)?>
+        </label>
 
-        <form method="POST">
+        <input type="hidden" name="espanol[]" value="<?= htmlspecialchars($palabra) ?>">
 
-            <?php foreach ($palabras as $palabra): ?>
+        <input type="text" name="respuesta[]">
+        <br>
 
-                <label>
-                    <?= htmlspecialchars($palabra) ?>:
-                </label>
+        <?php endforeach; ?>
 
-                <input type="hidden" name="espanol[]" value="<?= htmlspecialchars($palabra) ?>">
+    </form>
+    <hr>
 
-                <input type="text" name="respuesta[]">
+    <?php if(isset($mostrarResultados)): ?>
 
-                <br>
+    <h2>Resultados</h2>
+    <p>Correctas: <?= $correctas ?></p>
+    <p>Incorrectas: <?= $incorrectas ?></p>
+    <p>Soluciones</p>
 
-            <?php endforeach; ?>
+    <?php foreach($resultados as $resultado): ?>
+        <p><?=htmlspecialchars($resultado) ?></p>
+        <?php endforeach ?>
 
-            <input type="submit" name="comprobar" value="Aceptar">
-
+        <form method="GET">
+            <input type="submit" value="Jugar otra vez">
         </form>
-
-        <hr>
-
-        <?php if (isset($mostrarResultados)): ?>
-
-            <h2>Resultados</h2>
-
-            <p>Correctas: <?= $correctas ?></p>
-
-            <p>Incorrectas: <?= $incorrectas ?></p>
-
-            <h3>Soluciones</h3>
-
-            <?php foreach ($resultados as $resultado): ?>
-
-                <p><?= htmlspecialchars($resultado) ?></p>
-
-            <?php endforeach; ?>
-
-            <form method="GET">
-                <input type="submit" value="Jugar otra vez">
-            </form>
-
         <?php endif; ?>
+    <hr>
+
+    <form method="GET">
+        <input type="hidden" name="vista" value="admin">
+        <input type="submit" value="Administrar los pares de palabras">
+    </form>
+
+    <h2>Administracion de palabras</h2>
+
+    <form method="POST">
+
+        <input type="submit" name="nueva" value="Añadir nueva palabra">
+        <input type="submit" name="reiniciar" value="Reiniciar diccionario por defecto">
+        <input type="submit" name="principal" value="Regresar a pagina principal">
+    </form>
+
+    <h3>Diccionario</h3>
+
+    <table border="1">
+
+        <tr>
+            <th>Inglés</th>
+            <th>Español</th>
+            <th>Eliminar</th>
+            <th>Modificar</th>
+        </tr>
+
+        <tr>
+            <td>cat</td>
+            <td>gato</td>
+            <td>
+                <form method="POST">
+                    <input type="hidden" name="palabra" value="cat">
+                    <input type="submit" name="eliminar" value="Eliminar">
+                </form>
+            </td>
+            <td>
+                <form method="POST">
+                    <input type="hidden" name="palabra" value="cat">
+                    <input type="submit" name="modificar" value="Modificar">
+                </form>
+            </td>
+        </tr>
+
+        <tr>
+            <td>red</td>
+            <td>rojo</td>
+            <td>
+                <form method="POST">
+                    <input type="hidden" name="palabra" value="red">
+                    <input type="submit" name="eliminar" value="Eliminar">
+                </form>
+            </td>
+            <td>
+                <form method="POST">
+                    <input type="hidden" name="palabra" value="red">
+                    <input type="submit" name="modificar" value="Modificar">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>Water</td>
+            <td>Agua</td>
+            <td>
+                <form method="POST">
+                    <input type="hidden" name="palabra" value="water">
+                    <input type="submit" name="eliminar" value="Eliminar">
+                </form>
+            </td>
+            <td>
+                <form method="POST">
+                    <input type="hidden" name="palabra" value="water">
+                    <input type="submit" name="modificar" value="Modificar">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>Dinner</td>
+            <td>Cena</td>
+            <td>
+                <form method="POST">
+                    <input type="hidden" name="palabra" value="dinner">
+                    <input type="submit" name="eliminar" value="Eliminar">
+                </form>
+            </td>
+            <td>
+                <form method="POST">
+                    <input type="hidden" name="palabra" value="dinner">
+                    <input type="submit" name="modificar" value="Modificar">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>Foot</td>
+            <td>Pie</td>
+            <td>
+                <form method="POST">
+                    <input type="hidden" name="palabra" value="foot">
+                    <input type="submit" name="eliminar" value="Eliminar">
+                </form>
+            </td>
+            <td>
+                <form method="POST">
+                    <input type="hidden" name="palabra" value="foot">
+                    <input type="submit" name="modificar" value="Modificar">
+                </form>
+            </td>
+        </tr>
 
-        <hr>
+    </table>
 
-        <form method="GET">
-            <input type="hidden" name="vista" value="admin">
-            <input type="submit" value="Administrar los pares de palabras">
-        </form>
+    <hr>
 
+    <h2>Nueva palabra</h2>
 
-    <?php elseif ($vista == "admin"): ?>
+    <form method="POST">
 
-        <h2>Administración de palabras</h2>
+        <label>Español:</label>
+        <input type="text" name="espanol">
+        <br>
 
-        <form method="GET">
+        <label>Inglés:</label>
+        <input type="text" name="ingles">
+        <br>
 
-            <input type="hidden" name="vista" value="alta">
-            <input type="submit" value="Añadir nueva palabra">
+        <input type="submit" name="alta" value="Alta">
 
-        </form>
+    </form>
+    <hr>
 
-        <form method="POST">
+    <h2>Modificación</h2>
 
-            <input type="submit" name="reiniciar" value="Reiniciar a diccionario por defecto">
+    <form method="POST">
 
-        </form>
+        <label>Español:</label>
+        <input type="text" name="espanol" value="gato">
+        <br>
 
-        <form method="GET">
+        <label>Inglés:</label>
+        <input type="text" name="ingles" value="cat">
+        <br>
 
-            <input type="submit" value="Regresar a página principal">
+        <input type="hidden" name="anterior" value="cat">
 
-        </form>
+        <input type="submit" name="actualizar" value="Modificar">
 
-        <h3>Diccionario</h3>
-
-        <table border="1">
-
-            <tr>
-                <th>INGLÉS</th>
-                <th>ESPAÑOL</th>
-                <th>Eliminar</th>
-                <th>Modificar</th>
-            </tr>
-
-            <?php foreach ($diccionario as $espanol => $ingles): ?>
-
-                <tr>
-
-                    <td><?= htmlspecialchars($ingles) ?></td>
-
-                    <td><?= htmlspecialchars($espanol) ?></td>
-
-                    <td>
-
-                        <form method="POST">
-
-                            <input type="hidden" name="palabra" value="<?= htmlspecialchars($espanol) ?>">
-
-                            <input type="submit" name="eliminar" value="Eliminar">
-
-                        </form>
-
-                    </td>
-
-                    <td>
-
-                        <form method="GET">
-
-                            <input type="hidden" name="vista" value="modificar">
-
-                            <input type="hidden" name="palabra" value="<?= htmlspecialchars($espanol) ?>">
-
-                            <input type="submit" value="Modificar">
-
-                        </form>
-
-                    </td>
-
-                </tr>
-
-            <?php endforeach; ?>
-
-        </table>
-
-
-    <?php elseif ($vista == "alta"): ?>
-
-        <h2>Nueva palabra</h2>
-
-        <p><?= htmlspecialchars($mensaje) ?></p>
-
-        <form method="POST">
-
-            <label>Español:</label>
-            <input type="text" name="espanol">
-
-            <br>
-
-            <label>Inglés:</label>
-            <input type="text" name="ingles">
-
-            <br>
-
-            <input type="submit" name="alta" value="Alta">
-
-        </form>
-
-        <form method="GET">
-            <input type="hidden" name="vista" value="admin">
-            <input type="submit" value="Volver">
-        </form>
-
-
-    <?php elseif ($vista == "modificar"): ?>
-
-        <?php
-
-        $anterior = $_GET["palabra"] ?? "";
-
-        ?>
-
-        <h2>Modificación</h2>
-
-        <?php if (isset($diccionario[$anterior])): ?>
-
-            <form method="POST">
-
-                <label>Español:</label>
-
-                <input type="text" name="espanol" value="<?= htmlspecialchars($anterior) ?>">
-
-                <br>
-
-                <label>Inglés:</label>
-
-                <input type="text" name="ingles" value="<?= htmlspecialchars($diccionario[$anterior]) ?>">
-
-                <input type="hidden" name="anterior" value="<?= htmlspecialchars($anterior) ?>">
-
-                <br>
-
-                <input type="submit" name="actualizar" value="Modificar">
-
-            </form>
-
-        <?php else: ?>
-
-            <p>La palabra no existe.</p>
-
-        <?php endif; ?>
-
-        <form method="GET">
-            <input type="hidden" name="vista" value="admin">
-            <input type="submit" value="Volver">
-        </form>
-
-    <?php endif; ?>
+    </form>
 
 </body>
-
 </html>
