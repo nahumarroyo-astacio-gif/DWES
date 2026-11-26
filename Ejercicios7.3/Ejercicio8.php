@@ -10,7 +10,7 @@
         "ordenador" => "computer"
     ];
 
-    if (isset($_COOKIE[2diccionario])) {
+    if (isset($_COOKIE[$diccionario])) {
         $diccionario = unserialize($_COOKIE["diccionario"], true);
 
         if(!is_array($diccionario)){
